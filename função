@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void numero( int numeroUm, int numeroDois){
+    int maior;
+    int menor;
+
+    if (numeroUm > numeroDois){
+        maior = numeroUm;
+        menor = numeroDois;
+        
+
+
+    } else{
+        maior = numeroDois;
+        menor = numeroUm;
+        
+    }
+    printf("Maior: %d \n",maior);
+    printf("Menor: %d \n",menor);
+}
+ int main(){
+    int primeiroNumero, segundoNumero;
+
+    printf("digite um numero: ");
+    scanf("%d",&primeiroNumero);
+    printf("digite outro numero: ");
+    scanf("%d", &segundoNumero);
+
+    numero(primeiroNumero,segundoNumero);
+
+
+
+
+    return 0;
+ }
