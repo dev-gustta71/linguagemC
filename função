@@ -1,36 +1,105 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-void numero( int numeroUm, int numeroDois){
-    int maior;
-    int menor;
+void escolha(int resposta, char disciplina[][250], float media[])
+{
+    int i, j;
 
-    if (numeroUm > numeroDois){
-        maior = numeroUm;
-        menor = numeroDois;
-        
+    switch (resposta)
+    {
+    case 1:
+        for (i = 0; i < 3; i++)
+        {
+            printf("Disciplina %s\n", disciplina[i]);
+            printf("Media: %.2f\n", media[i]);
+        }
 
+        break;
 
-    } else{
-        maior = numeroDois;
-        menor = numeroUm;
-        
+    case 2:
+        for (i = 0; i < 3; i++)
+        {
+            printf("Disciplina: %s\n", disciplina[i]);
+
+            if (media[i] >= 7)
+            {
+                printf("Aprovado! \n\n");
+            }
+            else
+            {
+                printf("Reprovado! \n\n");
+            }
+        }
+        break;
+
+    case 3:
+        printf("-------------------\n");
+        printf("      MEDIA      \n");
+        printf("-------------------\n");
+        for (i = 0; i < 3; i++)
+        {
+            printf("Disciplina %s\n", disciplina[i]);
+            printf("Media: %.2f\n", media[i]);
+            printf("\n\n");
+
+            printf("-------------------\n");
+            printf("      RESULTADO     \n");
+            printf("-------------------\n");
+            for ( i = 0; i < 3; i++)
+            {
+                printf("Disciplina: %s\n",disciplina[i]);
+                if (media[i] >= 7)
+            {
+                printf("Aprovado! \n");
+            }
+            else
+            {
+                printf("Reprovado! \n");
+            }                
+            }
+            break;          
+        }
+
+  
     }
-    printf("Maior: %d \n",maior);
-    printf("Menor: %d \n",menor);
 }
- int main(){
-    int primeiroNumero, segundoNumero;
 
-    printf("digite um numero: ");
-    scanf("%d",&primeiroNumero);
-    printf("digite outro numero: ");
-    scanf("%d", &segundoNumero);
+int main(){
 
-    numero(primeiroNumero,segundoNumero);
+    int i, j;
+    char disciplina [3][250];
+    float somaNota = 0;
+    float media[3];
+    float nota[3][3];
+    int resposta;
 
-
+    for ( i = 0; i < 3; i++)
+    {
+        printf("Digite o nome da disciplina: ");
+        scanf("%s",&disciplina[i]);
+        for ( j = 0; j < 2; j++)
+        {
+           do{
+           printf("Digite sua %d nota: ", j+1);
+            scanf("%f",&nota[i][j]);
+           }while(nota[i][j] > 10 || nota[i][j] < 0  );
+            somaNota += nota[i][j];
+           
+        
+        }
+        media[i] = somaNota / j;
+        somaNota = 0;
+         system("cls");
+    }
+    printf("Escolha uma opcao: \n");
+    printf("[1] - Exibir a media: \n");
+    printf("[2] - Informar se esta aprovado/reprovado \n");
+    printf("[3] - Todas as informacoes! \n");
+    scanf("%d", &resposta);
+    
+    escolha(resposta, disciplina,media);    
 
 
     return 0;
- }
+}
