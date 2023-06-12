@@ -1,105 +1,135 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
-void escolha(int resposta, char disciplina[][250], float media[])
+void mostrarMedia(char disciplina[][250], float media[])
 {
-    int i, j;
-
-    switch (resposta)
+    int i;
+    printf("\n");
+    for (i = 0; i < 2; i++)
     {
-    case 1:
-        for (i = 0; i < 3; i++)
-        {
-            printf("Disciplina %s\n", disciplina[i]);
-            printf("Media: %.2f\n", media[i]);
-        }
 
-        break;
-
-    case 2:
-        for (i = 0; i < 3; i++)
-        {
-            printf("Disciplina: %s\n", disciplina[i]);
-
-            if (media[i] >= 7)
-            {
-                printf("Aprovado! \n\n");
-            }
-            else
-            {
-                printf("Reprovado! \n\n");
-            }
-        }
-        break;
-
-    case 3:
-        printf("-------------------\n");
-        printf("      MEDIA      \n");
-        printf("-------------------\n");
-        for (i = 0; i < 3; i++)
-        {
-            printf("Disciplina %s\n", disciplina[i]);
-            printf("Media: %.2f\n", media[i]);
-            printf("\n\n");
-
-            printf("-------------------\n");
-            printf("      RESULTADO     \n");
-            printf("-------------------\n");
-            for ( i = 0; i < 3; i++)
-            {
-                printf("Disciplina: %s\n",disciplina[i]);
-                if (media[i] >= 7)
-            {
-                printf("Aprovado! \n");
-            }
-            else
-            {
-                printf("Reprovado! \n");
-            }                
-            }
-            break;          
-        }
-
-  
+        printf("Discplina: %s\n", disciplina[i]);
+        printf("Media: %.2f\n\n", media[i]);
     }
 }
 
-int main(){
+void situacao(char disciplina[][250], float media[])
+{
+    int i;
+    printf("\n");
+
+    for (i = 0; i < 2; i++)
+    {
+        printf("Disciplina: %s\n", disciplina[i]);
+        if (media[i] >= 7)
+        {
+            printf("Aprovado!\n");
+        }
+        else if (media[i] >= 5)
+        {
+            printf("Recuperacao!\n");
+        }
+        else
+        {
+            printf("Reprovado!\n");
+        }
+    }
+}
+
+void tudo(char disciplina[][250], float media[])
+{
+    
 
     int i, j;
-    char disciplina [3][250];
-    float somaNota = 0;
-    float media[3];
-    float nota[3][3];
+
+    printf("\n");
+    printf("Todas as informacoes: \n");
+    printf("---------------------------\n");
+
+    for (i = 0; i < 2; i++)
+    {
+        printf("Discplina: %s\n", disciplina[i]);
+            printf("Media: %.2f\n\n", media[i]);
+
+        for (j = 0; j < 2; j++)
+        {
+            printf("Disciplina: %s", disciplina[i]);
+            if (media >= 7)
+            {
+                printf("Aprovado!");
+            }
+            else if (media >= 5)
+            {
+                printf("Recuperacao!");
+            }
+            else
+            {
+                printf("Reprovado!");
+            }
+        }
+    }
+}
+int main()
+{
+
+    int i, j;
+    char disciplina[2][250];
+    float nota[2][2];
+    float somaNota=0;
+    float media[2];
     int resposta;
 
-    for ( i = 0; i < 3; i++)
+    for (i = 0; i < 2; i++)
     {
+        fflush(stdin);
         printf("Digite o nome da disciplina: ");
-        scanf("%s",&disciplina[i]);
-        for ( j = 0; j < 2; j++)
+        gets(disciplina[i]);
+        for (j = 0; j < 2; j++)
         {
-           do{
-           printf("Digite sua %d nota: ", j+1);
-            scanf("%f",&nota[i][j]);
-           }while(nota[i][j] > 10 || nota[i][j] < 0  );
+            printf("Digite sua nota: ");
+            scanf("%f", &nota[i][j]);
             somaNota += nota[i][j];
-           
-        
         }
         media[i] = somaNota / j;
         somaNota = 0;
-         system("cls");
     }
-    printf("Escolha uma opcao: \n");
-    printf("[1] - Exibir a media: \n");
-    printf("[2] - Informar se esta aprovado/reprovado \n");
-    printf("[3] - Todas as informacoes! \n");
-    scanf("%d", &resposta);
-    
-    escolha(resposta, disciplina,media);    
+    system("cls");
 
+    do
+    {
+        printf("Escolha uma opcao: \n");
+        printf("[1] - Exibir a media: \n");
+        printf("[2] - Informar se esta aprovado/reprovado \n");
+        printf("[3] - Todas as informacoes! \n");
+        printf("[0] - Sair do programa!\n");
+        printf("--------------\n");
+        printf("Resposta: ");
+        scanf("%d", &resposta);
+
+        switch (resposta)
+        {
+        case 1:
+            mostrarMedia(disciplina, media);
+            break;
+        case 2:
+            situacao(disciplina, media);
+            break;
+        case 3:
+            tudo(disciplina, media);
+            break;
+
+        case 0:
+            printf("Saindo do programa...");
+            break;
+
+        default:
+            printf("Opcao imvalida!");
+        }
+    sleep(5);
+    system("cls");
+    } while (resposta != 0);
 
     return 0;
 }
